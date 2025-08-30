@@ -12,10 +12,19 @@ jobs:
             - run: echo "before " && ls -l
 
             - id: s02
+              # set up the node environment with v24
               uses: actions/setup-node@v4
               with: 
                 node-version: '24'
             - id: s03
+              # check out repo's code into the runner
               uses: actions/checkout@v5
             - run: echo "after " && ls -l
+            - id: s04
+              # prepare the environment by installing the required packages
+              run: npm i -g @angular/cli && npm ci && echo "Installed"
+            - id: s05
+              # build the app
+              run: ng build
+
 
